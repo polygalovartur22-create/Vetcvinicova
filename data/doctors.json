@@ -1,0 +1,25 @@
+{
+  "doctors": [
+    {
+      "id": "vetchinkina",
+      "name": "Ветчинкина Елена Александровна",
+      "specialty": "Главный врач, стоматолог-терапевт",
+      "experience": 15,
+      "image": "assets/images/doctors/vetchinkina.jpg"
+    },
+    {
+      "id": "petrov",
+      "name": "Петров Иван Сергеевич",
+      "specialty": "Стоматолог-хирург, имплантолог",
+      "experience": 12,
+      "image": "assets/images/doctors/petrov.jpg"
+    },
+    {
+      "id": "smirnova",
+      "name": "Смирнова Анна Владимировна",
+      "specialty": "Стоматолог-ортопед",
+      "experience": 8,
+      "image": "assets/images/doctors/smirnova.jpg"
+    }
+  ]
+}

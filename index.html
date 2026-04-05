@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стоматология доктора Ветчинкиной — Барнаул</title>
+    <meta name="description" content="Стоматология доктора Ветчинкиной в Барнауле. Лечение кариеса, эндодонтия, профессиональная чистка зубов, бесплатная консультация.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --primary-dark: #0a58ca;
+            --primary-light: #e8f4fc;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 30px rgba(74,144,226,0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Loading States */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            background: var(--bg-light);
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .error-message i {
+            font-size: 2rem;
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e8f4fc 100%);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(74,144,226,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-disclaimer {
+            background: rgba(255,255,255,0.8);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(74,144,226,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74,144,226,0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-hover);
+            object-fit: cover;
+            height: 500px;
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .badge-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .badge-text {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .badge-text span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .branch-notice {
+            background: var(--primary-light);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .branch-notice i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        /* Services Section - DYNAMIC BLOCK START */
+        .services {
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .service-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 1rem;
+        }
+
+        /* Doctors Section - DYNAMIC BLOCK START */
+        .doctors {
+            background: white;
+        }
+
+        .doctors-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: var(--primary-light);
+        }
+
+        .doctor-info {
+            padding: 1.5rem;
+        }
+
+        .doctor-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .doctor-specialty {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .doctor-experience {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Advantages Section */
+        .advantages {
+            background: var(--bg-light);
+        }
+
+        .advantages-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .advantage-item:hover .advantage-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .advantage-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .advantage-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* News Section - DYNAMIC BLOCK START */
+        .news {
+            background: white;
+        }
+
+        .news-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), #e0f2fe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .news-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .news-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: var(--bg-light);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+            color: var(--primary);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e8f4fc 100%);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .contact-info > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            flex-shrink: 0;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .working-hours {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .working-hours h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .working-hours h4 i {
+            color: var(--primary);
+        }
+
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .hours-row span:first-child {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .contact-form-wrapper > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(74,144,226,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-note i {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo-text {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-text span {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-image img {
+                height: 350px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                gap: 1.5rem;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-phone {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .doctors-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+    <base target="_blank">
+</head>
+<body>
+    <!-- Yandex.Metrika counter -->
+    <!-- ЗАМЕНИТЬ: Вставьте сюда код Яндекс.Метрики -->
+    <!-- /Yandex.Metrika counter -->
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                     <img src="https://i8.imageban.ru/out/2026/04/05/6a10f9c024b3e6fc6f28d7eb5c52e4d1.png" alt="Стоматология доктора Ветчинкиной" style="height: 50px; width: auto;">
+                </div>
+                <div class="logo-text">
+                    Стоматология
+                    <span>доктора Ветчинкиной</span>
+                </div>
+            </a>
+
+            <nav id="nav">
+                <a href="#about">О нас</a>
+                <a href="#services">Услуги</a>
+                <a href="#doctors">Врачи</a>
+                <a href="#advantages">Преимущества</a>
+                <a href="#news">Новости</a>
+                <a href="#faq">Вопросы</a>
+                <a href="#contact">Контакты</a>
+            </nav>
+
+            <a href="tel:+73852556605" class="header-phone">
+                <i class="fas fa-phone"></i>
+                +7 (385) 255-66-05
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content reveal">
+                <h1>Здоровая улыбка <span>начинается здесь</span></h1>
+                <p class="hero-subtitle">Профессиональная стоматология в Барнауле. Современное оборудование, опытные специалисты, бережное лечение.</p>
+                <div class="hero-disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    Имеются противопоказания, необходима консультация специалиста.
+                </div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Записаться на приём
+                    </a>
+                    <a href="tel:+73852556605" class="btn btn-outline">
+                        <i class="fas fa-phone"></i>
+                        Позвонить
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image reveal">
+                <img src="https://s7.stc.all.kpcdn.net/russia/wp-content/uploads/2023/07/stomatologii-kazani-sotsialnaya-stomatologiya.jpg" alt="Стоматологический кабинет">
+                <div class="hero-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="badge-text">
+                        Бесплатная консультация
+                        <span>Запишитесь на осмотр</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image reveal">
+                <img src="https://avatars.mds.yandex.net/i?id=5efd7e4e3036e4d8877292912cb4ef8c_l-5220584-images-thumbs&n=13" alt="О клинике">
+            </div>
+            <div class="about-content reveal">
+                <h3>О клинике</h3>
+                <p>Стоматология доктора Ветчинкиной предоставляет широкий спектр услуг, включая лечение кариеса, эндодонтическое лечение каналов, чистку зубов, ультразвуковое обследование зубов, ассистированное стоматологическое лечение.</p>
+                <p>Наши специалисты помогут вам сделать правильный выбор и обеспечить здоровый образ жизни. Вы также можете получить бесплатную консультацию с осмотром. Мы используем новейшие методы обследования и предлагаем выбор удобного решения посещения.</p>
+
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Современное оборудование</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Опытные специалисты</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Безопасная анестезия</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Комфортная атмосфера</span>
+                    </div>
+                </div>
+
+                <div class="branch-notice">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <strong>Важно:</strong> Наш филиал на Малахово 87 работает до 1 июня.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - DYNAMIC CONTENT -->
+    <!-- 
+        DYNAMIC BLOCK: Services
+        Container: #services-container
+        Data source: data/services.json
+        JavaScript function: renderServices()
+    -->
+    <section class="services" id="services">
+        <div class="section-header reveal">
+            <h2>Наши услуги</h2>
+            <p>Полный спектр стоматологических услуг для всей семьи</p>
+        </div>
+
+        <!-- Dynamic services will be loaded here -->
+        <div id="services-container" class="services-grid">
+            <!-- Fallback content shown while loading -->
+            <div class="service-card loading-skeleton" style="height: 250px;"></div>
+            <div class="service-card loading-skeleton" style="height: 250px;"></div>
+            <div class="service-card loading-skeleton" style="height: 250px;"></div>
+        </div>
+    </section>
+
+    <!-- Doctors Section - DYNAMIC CONTENT -->
+    <!-- 
+        DYNAMIC BLOCK: Doctors
+        Container: #doctors-container
+        Data source: data/doctors.json
+        JavaScript function: renderDoctors()
+    -->
+    <section class="doctors" id="doctors">
+        <div class="section-header reveal">
+            <h2>Наши врачи</h2>
+            <p>Профессионалы с многолетним опытом работы</p>
+        </div>
+
+        <!-- Dynamic doctors will be loaded here -->
+        <div id="doctors-container" class="doctors-grid">
+            <!-- Fallback content shown while loading -->
+            <div class="doctor-card loading-skeleton" style="height: 400px;"></div>
+            <div class="doctor-card loading-skeleton" style="height: 400px;"></div>
+            <div class="doctor-card loading-skeleton" style="height: 400px;"></div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages" id="advantages">
+        <div class="section-header reveal">
+            <h2>Почему выбирают нас</h2>
+            <p>Наши ключевые преимущества</p>
+        </div>
+
+        <div class="advantages-grid">
+            <div class="advantage-item reveal">
+                <div class="advantage-icon">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <h3>Новейшие методы обследования</h3>
+                <p>Используем современное диагностическое оборудование для точной постановки диагноза</p>
+            </div>
+
+            <div class="advantage-item reveal">
+                <div class="advantage-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>Бесплатная консультация</h3>
+                <p>Первичный осмотр и консультация специалиста проводятся бесплатно</p>
+            </div>
+
+            <div class="advantage-item reveal">
+                <div class="advantage-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>3 филиала в Барнауле</h3>
+                <p>Удобное расположение клиник по разным адресам города</p>
+            </div>
+
+            <div class="advantage-item reveal">
+                <div class="advantage-icon">
+                    <i class="fas fa-user-nurse"></i>
+                </div>
+                <h3>Опытные специалисты</h3>
+                <p>Высококвалифицированные врачи с многолетним опытом работы</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section - DYNAMIC CONTENT -->
+    <!-- 
+        DYNAMIC BLOCK: News
+        Container: #news-container
+        Data source: data/news.json
+        JavaScript function: renderNews()
+    -->
+    <section class="news" id="news">
+        <div class="section-header reveal">
+            <h2>Новости и акции</h2>
+            <p>Будьте в курсе последних событий</p>
+        </div>
+
+        <!-- Dynamic news will be loaded here -->
+        <div id="news-container" class="news-grid">
+            <!-- Fallback content shown while loading -->
+            <div class="news-card loading-skeleton" style="height: 350px;"></div>
+            <div class="news-card loading-skeleton" style="height: 350px;"></div>
+            <div class="news-card loading-skeleton" style="height: 350px;"></div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="section-header reveal">
+            <h2>Часто задаваемые вопросы</h2>
+            <p>Ответы на популярные вопросы о наших услугах</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Что включает в себя стоматология доктора Ветчинкиной?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Стоматология включает лечение кариеса, эндодонтию, чистку зубов, ультразвуковое обследование, ассистированное лечение. Также бесплатная консультация с осмотром.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Какие методы обезболивания используют?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Используются современные безопасные анестетики, возможно лечение при беременности (после консультации).
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Можно ли лечить зубы при беременности?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Да, при необходимости с разрешения акушера-гинеколога, с применением разрешённых препаратов.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <h3>Свяжитесь с нами</h3>
+                <p>Запишитесь на приём или получите бесплатную консультацию. Мы ответим на все ваши вопросы.</p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Телефон</h4>
+                            <p><a href="tel:+73852556605">+7 (385) 255-66-05</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Адреса</h4>
+                            <p>Россия, Барнаул<br>Малахова 57, Малахова 83, Чкалова 57</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@dr-vetchinkina.ru">info@dr-vetchinkina.ru</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="working-hours">
+                    <h4><i class="fas fa-clock"></i> Режим работы</h4>
+                    <div class="hours-list">
+                        <div class="hours-row">
+                            <span>Понедельник — Пятница</span>
+                            <span>9:00 — 20:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span>Суббота</span>
+                            <span>10:00 — 18:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span>Воскресенье</span>
+                            <span>Выходной</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper reveal">
+                <h3>Записаться на приём</h3>
+                <p>Заполните форму, и мы свяжемся с вами в ближайшее время</p>
+
+                <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" name="name" required placeholder="Иван Иванов">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Удобное время для визита</label>
+                        <select id="time" name="time">
+                            <option value="">Выберите время</option>
+                            <option value="morning">Утро (9:00 — 12:00)</option>
+                            <option value="day">День (12:00 — 16:00)</option>
+                            <option value="evening">Вечер (16:00 — 20:00)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i>
+                        Записаться на приём
+                    </button>
+
+                    <p class="form-note">
+                        <i class="fas fa-shield-alt"></i>
+                        Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-text" style="font-size: 1.3rem; margin-bottom: 1rem;">
+                    Стоматология
+                    <span>доктора Ветчинкиной</span>
+                </div>
+                <p>Профессиональная стоматологическая помощь в Барнауле. Забота о вашей улыбке — наша главная задача.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#doctors">Врачи</a></li>
+                    <li><a href="#advantages">Преимущества</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Пациентам</h4>
+                <ul>
+                    <li><a href="#faq">Вопросы и ответы</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="#">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Контакты</h4>
+                <ul>
+                    <li><a href="tel:+73852556605">+7 (385) 255-66-05</a></li>
+                    <li><a href="mailto:info@dr-vetchinkina.ru">info@dr-vetchinkina.ru</a></li>
+                    <li>Барнаул, Малахова 57</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Стоматология доктора Ветчинкиной. Все права защищены.</p>
+            <p>Имеются противопоказания, необходима консультация специалиста.</p>
+        </div>
+    </footer>
+
+    <!-- Dynamic Content Loading Script -->
+    <script>
+        // ==========================================
+        // DYNAMIC CONTENT LOADER
+        // Loads data from JSON files and renders HTML
+        // ==========================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load all dynamic content
+            loadServices();
+            loadDoctors();
+            loadNews();
+            
+            // Initialize other UI components
+            initMobileMenu();
+            initHeaderScroll();
+            initScrollReveal();
+            initFaqAccordion();
+            initPhoneMask();
+            initSmoothScroll();
+        });
+
+        // ------------------------------------------
+        // SERVICES LOADER
+        // Container: #services-container
+        // Data: data/services.json
+        // ------------------------------------------
+        async function loadServices() {
+            const container = document.getElementById('services-container');
+            
+            try {
+                const response = await fetch('data/services.json');
+                if (!response.ok) throw new Error('Failed to load services');
+                
+                const data = await response.json();
+                renderServices(data.services || []);
+            } catch (error) {
+                console.error('Error loading services:', error);
+                container.innerHTML = `
+                    <div class="error-message" style="grid-column: 1/-1;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Не удалось загрузить услуги. Пожалуйста, обновите страницу.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderServices(services) {
+            const container = document.getElementById('services-container');
+            
+            if (services.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Услуги временно недоступны</p>';
+                return;
+            }
+
+            const html = services.map(service => `
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="${service.icon || 'fas fa-tooth'}"></i>
+                    </div>
+                    <h3>${escapeHtml(service.title)}</h3>
+                    <p>${escapeHtml(service.description)}</p>
+                    ${service.price ? `<div class="service-price">${service.price} ₽</div>` : ''}
+                    ${service.badge ? `<span class="service-badge">${escapeHtml(service.badge)}</span>` : ''}
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+            
+            // Re-trigger reveal animation for new elements
+            setTimeout(initScrollReveal, 100);
+        }
+
+        // ------------------------------------------
+        // DOCTORS LOADER
+        // Container: #doctors-container
+        // Data: data/doctors.json
+        // ------------------------------------------
+        async function loadDoctors() {
+            const container = document.getElementById('doctors-container');
+            
+            try {
+                const response = await fetch('data/doctors.json');
+                if (!response.ok) throw new Error('Failed to load doctors');
+                
+                const data = await response.json();
+                renderDoctors(data.doctors || []);
+            } catch (error) {
+                console.error('Error loading doctors:', error);
+                container.innerHTML = `
+                    <div class="error-message" style="grid-column: 1/-1;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Не удалось загрузить информацию о врачах. Пожалуйста, обновите страницу.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderDoctors(doctors) {
+            const container = document.getElementById('doctors-container');
+            
+            if (doctors.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Информация о врачах временно недоступна</p>';
+                return;
+            }
+
+            const html = doctors.map(doctor => `
+                <div class="doctor-card reveal">
+                    <img src="${doctor.image || 'assets/images/doctor-placeholder.jpg'}" 
+                         alt="${escapeHtml(doctor.name)}" 
+                         class="doctor-image"
+                         onerror="this.src='assets/images/doctor-placeholder.jpg'">
+                    <div class="doctor-info">
+                        <h3>${escapeHtml(doctor.name)}</h3>
+                        <div class="doctor-specialty">${escapeHtml(doctor.specialty)}</div>
+                        <div class="doctor-experience">
+                            <i class="fas fa-briefcase"></i> 
+                            Стаж: ${doctor.experience} ${getYearWord(doctor.experience)}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+            setTimeout(initScrollReveal, 100);
+        }
+
+        // ------------------------------------------
+        // NEWS LOADER
+        // Container: #news-container
+        // Data: data/news.json
+        // ------------------------------------------
+        async function loadNews() {
+            const container = document.getElementById('news-container');
+            
+            try {
+                const response = await fetch('data/news.json');
+                if (!response.ok) throw new Error('Failed to load news');
+                
+                const data = await response.json();
+                renderNews(data.news || []);
+            } catch (error) {
+                console.error('Error loading news:', error);
+                container.innerHTML = `
+                    <div class="error-message" style="grid-column: 1/-1;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Не удалось загрузить новости. Пожалуйста, обновите страницу.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderNews(news) {
+            const container = document.getElementById('news-container');
+            
+            if (news.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Новости временно недоступны</p>';
+                return;
+            }
+
+            const html = news.map(item => `
+                <div class="news-card reveal">
+                    <div class="news-image">
+                        ${item.image ? 
+                            `<img src="${item.image}" alt="${escapeHtml(item.title)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                             <i class="fas fa-newspaper" style="display: none; height: 100%; align-items: center; justify-content: center;"></i>` :
+                            `<i class="${item.icon || 'fas fa-newspaper'}"></i>`
+                        }
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${formatDate(item.date)}
+                        </div>
+                        <h3>${escapeHtml(item.title)}</h3>
+                        <p>${escapeHtml(item.content)}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+            setTimeout(initScrollReveal, 100);
+        }
+
+        // ------------------------------------------
+        // UTILITY FUNCTIONS
+        // ------------------------------------------
+        
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            if (isNaN(date)) return dateString;
+            
+            return date.toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        // Get correct word form for years
+        function getYearWord(years) {
+            const lastDigit = years % 10;
+            const lastTwoDigits = years % 100;
+            
+            if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return 'лет';
+            if (lastDigit === 1) return 'год';
+            if (lastDigit >= 2 && lastDigit <= 4) return 'года';
+            return 'лет';
+        }
+
+        // ------------------------------------------
+        // UI INITIALIZATION FUNCTIONS
+        // ------------------------------------------
+        
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('nav');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                });
+            });
+        }
+
+        function initHeaderScroll() {
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            revealElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        function initFaqAccordion() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    faqItems.forEach(i => i.classList.remove('active'));
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        function initPhoneMask() {
+            const phoneInput = document.getElementById('phone');
+            if (!phoneInput) return;
+            
+            phoneInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    if (value[0] === '7' || value[0] === '8') {
+                        value = value.substring(1);
+                    }
+                    let formattedValue = '+7';
+                    if (value.length > 0) {
+                        formattedValue += ' (' + value.substring(0, 3);
+                    }
+                    if (value.length >= 3) {
+                        formattedValue += ') ' + value.substring(3, 6);
+                    }
+                    if (value.length >= 6) {
+                        formattedValue += '-' + value.substring(6, 8);
+                    }
+                    if (value.length >= 8) {
+                        formattedValue += '-' + value.substring(8, 10);
+                    }
+                    e.target.value = formattedValue;
+                }
+            });
+        }
+
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Trigger reveal on scroll
+        window.addEventListener('scroll', initScrollReveal);
+    </script>
+</body>
+</html>
