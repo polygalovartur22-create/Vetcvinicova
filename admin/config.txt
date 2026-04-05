@@ -1,0 +1,122 @@
+backend:
+  name: git-gateway
+  repo: polygalovartur22-create/Vetcvinicova
+  branch: main
+  base_url: https://decap-cms-oauth-vetch.vercel.app
+# Media upload configuration
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+# Site URL (update after deployment)
+site_url: https://your-site.netlify.app
+display_url: https://your-site.netlify.app
+
+# Collections configuration
+collections:
+  # Services Collection
+  - name: "services"
+    label: "Услуги и цены"
+    folder: "data"
+    create: true
+    slug: "services"
+    identifier_field: "id"
+    extension: "json"
+    format: "json"
+    nested:
+      depth: 1
+    fields:
+      - label: "ID услуги"
+        name: "id"
+        widget: "string"
+        hint: "Уникальный идентификатор (например: caries-treatment)"
+      - label: "Название услуги"
+        name: "title"
+        widget: "string"
+      - label: "Описание"
+        name: "description"
+        widget: "text"
+      - label: "Цена (₽)"
+        name: "price"
+        widget: "number"
+        default: 0
+        min: 0
+        step: 100
+      - label: "Иконка (Font Awesome)"
+        name: "icon"
+        widget: "string"
+        default: "fas fa-tooth"
+        hint: "Класс иконки Font Awesome (например: fas fa-tooth)"
+      - label: "Бейдж"
+        name: "badge"
+        widget: "string"
+        required: false
+        hint: "Например: Бесплатно, Акция, Новинка"
+
+  # Doctors Collection
+  - name: "doctors"
+    label: "Врачи"
+    folder: "data"
+    create: true
+    slug: "doctors"
+    identifier_field: "id"
+    extension: "json"
+    format: "json"
+    fields:
+      - label: "ID врача"
+        name: "id"
+        widget: "string"
+        hint: "Уникальный идентификатор (например: vetchinkina)"
+      - label: "ФИО"
+        name: "name"
+        widget: "string"
+      - label: "Специализация"
+        name: "specialty"
+        widget: "string"
+      - label: "Опыт работы (лет)"
+        name: "experience"
+        widget: "number"
+        min: 0
+        max: 50
+      - label: "Фотография"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Рекомендуемый размер: 400x500px"
+        media_folder: "/assets/images/doctors"
+
+  # News Collection
+  - name: "news"
+    label: "Новости и акции"
+    folder: "data"
+    create: true
+    slug: "news"
+    identifier_field: "id"
+    extension: "json"
+    format: "json"
+    fields:
+      - label: "ID новости"
+        name: "id"
+        widget: "string"
+        hint: "Уникальный идентификатор (например: new-year-2026)"
+      - label: "Заголовок"
+        name: "title"
+        widget: "string"
+      - label: "Содержание"
+        name: "content"
+        widget: "text"
+      - label: "Дата публикации"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - label: "Иконка (Font Awesome)"
+        name: "icon"
+        widget: "string"
+        default: "fas fa-newspaper"
+        required: false
+      - label: "Изображение"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Если не загружено, будет использована иконка"
